@@ -95,8 +95,8 @@ export const DEMO_VERSIONS: Record<string, DemoVersionConfig> = {
     scrollDistanceVh: 400,
     timing: {
       duration: 10.04,
-      autoplayEnd: 2.2, // logo monolith settled after rising from the earth
-      scrubStart: 2.2,
+      autoplayEnd: 2.18, // logo monolith settled after rising from the earth
+      scrubStart: 2.18,
       actionStart: 3.5, // excavator bucket enters top-left
       impactTime: 4.8, // bucket digs into the logo face
       dustTakeoverTime: 7.6, // dust plume overtakes the scene
