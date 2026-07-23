@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #080908;
+  --color-charcoal: #141513;
+  --color-earth: #2b2118;
+  --color-orange: #f2a000;
+  --color-orange-dark: #c97d00;
+  --color-cream: #f2efe7;
+  --color-muted: #a7a39b;
+  --color-line: rgba(255, 255, 255, 0.12);
+
+  --font-display: var(--font-barlow), "Barlow Condensed", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+}
+
+html {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-orange);
+  color: var(--color-ink);
+}
+
+/* White version of the black logo artwork */
+.logo-invert {
+  filter: invert(1) brightness(1.05);
+}
+
+/* Subtle film grain over the hero */
+.film-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  mix-blend-mode: overlay;
+}
+
+/* Warm treatment + vignette on the video scene */
+.scene-vignette {
+  background:
+    radial-gradient(120% 90% at 50% 45%, transparent 55%, rgba(8, 9, 8, 0.55) 100%);
+}
+.scene-warmth {
+  background: linear-gradient(180deg, rgba(242, 160, 0, 0.05), rgba(43, 33, 24, 0.12));
+  mix-blend-mode: soft-light;
+}
+
+/* Left text-safe gradient — blends into the scene, not a panel */
+.hero-text-gradient {
+  background: linear-gradient(
+    100deg,
+    rgba(8, 9, 8, 0.82) 0%,
+    rgba(8, 9, 8, 0.6) 24%,
+    rgba(8, 9, 8, 0.28) 42%,
+    rgba(8, 9, 8, 0.06) 56%,
+    transparent 68%
+  );
+}
+@media (max-width: 767px) {
+  .hero-text-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(8, 9, 8, 0.55) 0%,
+      rgba(8, 9, 8, 0.35) 40%,
+      rgba(8, 9, 8, 0.78) 100%
+    );
+  }
+}
+
+.nav-gradient {
+  background: linear-gradient(180deg, rgba(8, 9, 8, 0.75) 0%, rgba(8, 9, 8, 0.35) 60%, transparent 100%);
+}
+
+/* The services section overlaps the pinned hero during the dust takeover */
+.services-rise {
+  margin-top: calc(var(--rise, 0vh) * -1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .services-rise {
+    margin-top: 0;
+  }
+}
+
+/* Loading screen: drifting dust wisps + content entrance */
+.loader-wisp {
+  background: radial-gradient(closest-side, rgba(151, 121, 88, 0.14), transparent 70%);
+  filter: blur(30px);
+  animation: loader-drift 20s ease-in-out infinite alternate;
+}
+@keyframes loader-drift {
+  from { transform: translate3d(-6%, 2%, 0) scale(1); }
+  to { transform: translate3d(8%, -4%, 0) scale(1.15); }
+}
+.loader-content {
+  animation: loader-rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes loader-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader-wisp { animation: none; }
+  .loader-content { animation: none; }
+}
+
+@keyframes scroll-pulse {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(7px); opacity: 0.4; }
+}
+.scroll-dot {
+  animation: scroll-pulse 2.2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-dot { animation: none; }
+}
